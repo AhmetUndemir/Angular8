@@ -1,7 +1,7 @@
 <h3 *ngIf="products; else noProduct">{{title}}</h3>
 <div class="form-group">
         <input  class="form-control" id="productName" placeholder="Ürünü aratınız." [(ngModel)]="filterText" >
-        <small *ngIf="filterText" class="form-text text-muted">Şu an <b>{{filterText}}</b>> aradınız.</small>
+        <small *ngIf="filterText" class="form-text text-muted">Şu an <b>{{filterText}}</b> aradınız.</small>
 </div>
 
 
