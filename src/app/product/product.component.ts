@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from './product';
-import {AlertifyService} from '../services/alertify.service';
+import { AlertifyService } from '../services/alertify.service';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-product',
@@ -9,21 +11,19 @@ import {AlertifyService} from '../services/alertify.service';
 })
 export class ProductComponent implements OnInit {
 
-  constructor(private alertifyService:AlertifyService) { }
+  constructor(private alertifyService: AlertifyService, private http: HttpClient) { }
   title = "Ürün Listesi"
   filterText = ""
-  products: Product[] = [
-    { id: 1, name: "Laptop", price: 2500, categoryId: 1, description: "Asus Zenbook", imageUrl: "https://images.unsplash.com/photo-1484788984921-03950022c9ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=804&q=80" },
-    { id: 2, name: "Klavye", price: 25, categoryId: 2, description: "A4 Tech", imageUrl: "https://images.unsplash.com/photo-1484788984921-03950022c9ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=804&q=80" },
-    { id: 3, name: "Mouse", price: 25, categoryId: 2, description: "A4 Tech", imageUrl: "https://images.unsplash.com/photo-1484788984921-03950022c9ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=804&q=80" },
-    { id: 4, name: "Telefon", price: 25, categoryId: 2, description: "A4 Tech", imageUrl: "https://images.unsplash.com/photo-1484788984921-03950022c9ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=804&q=80" },
-    { id: 5, name: "Buzdolabı", price: 25, categoryId: 2, description: "A4 Tech", imageUrl: "https://images.unsplash.com/photo-1484788984921-03950022c9ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=804&q=80" },
-    { id: 6, name: "Notebook", price: 25, categoryId: 2, description: "A4 Tech", imageUrl: "https://images.unsplash.com/photo-1484788984921-03950022c9ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=804&q=80" }
-  ]
+  products: Product[];
+  path = "http://localhost:3000/products";
+
   ngOnInit() {
+    this.http.get<Product[]>(this.path).subscribe(data => {
+      this.products = data
+    });
   }
 
-  addToCart(product){
+  addToCart(product) {
     this.alertifyService.success(product.name + " added")
   }
 
