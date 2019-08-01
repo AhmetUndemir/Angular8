@@ -15,7 +15,7 @@ export class CategoryComponent implements OnInit {
     { id: 2, name: "Bilgisayar" },
     { id: 3, name: "İletişim" },
     { id: 4, name: "Müzik" },
-    { id: 5, name: "İçecek" }
+    { id: 5, name: "Telefon" }
 
   ]
   ngOnInit() {
